@@ -59,7 +59,8 @@ app.listen(5555, () => {
     console.log('Server started to 5555')
 });
 
-const MONGO_URI = 'mongodb+srv://nester2108_db_user:566QQE5rnPtdfH9h@cluster0.93xdqnj.mongodb.net/mydatabase';
+const MONGO_URI = 'mongodb+srv://nester2108_db_user:566QQE5rnPtdfH9h@cluster0.93xdqnj.mongodb.net/mydatabase?retryWrites=true&w=majority';
+                  
 
 mongoose.connect(MONGO_URI);
 
