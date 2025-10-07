@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://NovikovSergej.github.io/Project23.1/",
+  "homepage": "https://github.com/NovikovSergej/Project23.1/npm",
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
     "deploy": "gh-pages -d build",
-    "startServer": "nodemon server/index.mjs"
+    "startServer": "nodemon server/index.mjs",
+    "start:prod": "node server/index.mjs"
   },
   "keywords": [],
   "author": "",
