@@ -1,21 +1,27 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path';
+import url from 'url';
 import Todo from './Todo.mjs';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, '../build')));
 app.use(cors());
 app.use(express.json());
 
-app.get('/todo-list', (req, res) => {
+app.get('/api/todo-list', (req, res) => {
     return Todo.find()
         .then(data => {
             res.send(data);
         });
 });
 
-app.post('/add-todo', (req, res) => {
+app.post('/api/add-todo', (req, res) => {
 
     const { text, isDone } = req.body;
 
@@ -34,7 +40,7 @@ app.post('/add-todo', (req, res) => {
 
 });
 
-app.put('/update-todo/:id', async (req, res) => {
+app.put('/api/update-todo/:id', async (req, res) => {
     try {
         const { isDone } = req.body;
         const updated = await Todo.findByIdAndUpdate(req.params.id, { isDone }, { new: true });
@@ -44,7 +50,7 @@ app.put('/update-todo/:id', async (req, res) => {
     }
 });
 
-app.delete('/delete-todo/:id', async (req, res) => {
+app.delete('/api/delete-todo/:id', async (req, res) => {
     try {
         await Todo.findByIdAndDelete(req.params.id);
         res.send({ message: 'Deleted' });
@@ -53,13 +59,13 @@ app.delete('/delete-todo/:id', async (req, res) => {
     }
 });
 
+const HOST = process.env.HOST || "";
+const PORT = process.env.PORT || "5555";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/mydatabase";
 
-app.listen(5555, () => {
-    console.log('Server started to 5555')
+app.listen(PORT, HOST, () => {
+    console.log(`Server started on http://${HOST}:${PORT}`);
 });
-
-const MONGO_URI = 'mongodb+srv://nester2108_db_user:566QQE5rnPtdfH9h@cluster0.93xdqnj.mongodb.net/mydatabase?retryWrites=true&w=majority';
-                  
 
 mongoose.connect(MONGO_URI);
 
