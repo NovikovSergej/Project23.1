@@ -5,7 +5,6 @@ import Todo from './Todo.mjs';
 
 const app = express();
 
-//app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 

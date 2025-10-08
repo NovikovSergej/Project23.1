@@ -20,7 +20,7 @@ async function init() {
 
 async function loadTodosFromServer() {
     try {
-        const response = await fetch('http://localhost:5555/todo-list');
+        const response = await fetch('https://project23-1-4.onrender.com/todo-list');
         const data = await response.json();
         todos = data;
     } catch (err) {
@@ -80,7 +80,7 @@ function attachFormListener() {
         if (value === '') return;
 
         try {
-            const response = await fetch('http://localhost:5555/add-todo', {
+            const response = await fetch('https://project23-1-4.onrender.com/add-todo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ function attachFormListener() {
 
 async function toggleTodo(id, isDone) {
     try {
-        await fetch(`http://localhost:5555/update-todo/${id}`, {
+        await fetch(`https://project23-1-4.onrender.com/update-todo/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ async function toggleTodo(id, isDone) {
 
 async function deleteTodo(id) {
     try {
-        await fetch(`http://localhost:5555/delete-todo/${id}`, {
+        await fetch(`https://project23-1-4.onrender.com/delete-todo/${id}`, {
             method: 'DELETE'
         });
     } catch (err) {
